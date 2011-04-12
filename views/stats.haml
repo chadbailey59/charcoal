@@ -1,0 +1,11 @@
+- data.each do |k, v|
+  -# Projects
+  %h2{:id => k.slugify}= k
+  - v.each do |kk, vv|
+    -# Sections
+    %h3{:id => "#{k.slugify}_#{kk.slugify}"}= kk
+    - vv.each do |jjj, vvv|
+      -# Graphs
+      %img{:id => "#{k.slugify}_#{kk.slugify}_#{jjj.slugify}_img", :src => vvv, :alt => jjj}
+      %h4{:id => "#{k.slugify}_#{kk.slugify}_#{jjj.slugify}"}= jjj.slugify
+    
