@@ -1,0 +1,82 @@
+# Charcoal supports the following structure:
+# - A page has multiple Projects.
+# - A projet can have several Images (usually for overviews),
+#   optionally followed by several Sections.
+# - Sections can have several Images.
+#
+# -----------------------------------------------------------
+#
+# The format of the config file is as follows:
+# 
+# Title: Page title
+# [Project Name]:
+#   Images:
+#     [Image Name]: [Image URL]
+#     [Image Name]: [Image URL]
+#   Sections:
+#     [Section Name]:
+#       [Image Name]: [Image URL]
+#       [Image Name]: [Image URL]
+#       ...
+#     [Section Name]:
+#       [Image Name]: [Image URL]
+#       ...
+#     ...
+#
+# [Project Name]:
+#   ...
+#
+# (Repeat ad infinitum.)
+#
+# -----------------------------------------------------------
+#
+# Image Sizes
+#
+# There's a constant gutter of 20px between each image if
+# there are multiple images on a line.
+# 
+# Projects have 920px of "image width." This means you can
+# have:
+# - a single image 920px wide on a line
+# - two images that are each 450px wide (with 20px btwthem)
+# - 3 across at 293/294/293px
+# - and so on.
+#
+# Sections have 70px of "image width." This means, most
+# commonly, two 370px wide images on a line.
+
+Title: Dashboard
+
+Project 1:
+  Images:
+    Hourly: http://placekitten.com/920/220
+    Daily:  http://placekitten.com/370/220
+    Weekly: http://placekitten.com/530/220
+  Sections:
+    Section 1:
+      Images:
+        Hourly: http://placekitten.com/760/220
+        Daily:  http://placekitten.com/370/220
+        Weekly: http://placekitten.com/370/220
+    Section 2:
+      Images:
+        Hourly: http://placekitten.com/370/220
+        Daily:  http://placekitten.com/370/220
+        Weekly: http://placekitten.com/370/220
+
+Project 2:
+  Images:
+    Hourly: http://placekitten.com/293/220
+    Daily:  http://placekitten.com/294/220
+    Weekly: http://placekitten.com/293/220
+  Sections:
+    Section 1:
+      Images:
+        Hourly: http://placekitten.com/370/220
+        Daily:  http://placekitten.com/370/220
+        Weekly: http://placekitten.com/370/220
+    Section 2:
+      Images:
+        Hourly: http://placekitten.com/370/220
+        Daily:  http://placekitten.com/370/220
+        Weekly: http://placekitten.com/370/220
