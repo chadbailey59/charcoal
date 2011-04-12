@@ -59,6 +59,10 @@ h1 {
   margin-bottom: 10px;
 }
 
+div.links {
+  padding-left: 20px;
+}
+
 h2 {
   font-size: 30px;
   font-weight; bold;
