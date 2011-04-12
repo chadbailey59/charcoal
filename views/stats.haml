@@ -1,5 +1,11 @@
 - data.each do |k, v|
-
+  %div.links
+    %a{:href => "\##{k.slugify}"}
+      = k
+    %span :&nbsp;
+    - v.each do |kk, vv|
+      %a{:href => "\##{k.slugify}_#{kk.slugify}"}
+        = kk
 - data.each do |k, v|
   -# Projects
   .project
