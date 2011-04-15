@@ -1,27 +1,35 @@
 # Charcoal supports the following structure:
 # - A page has multiple Projects.
-# - A projet can have several Images (usually for overviews),
-#   optionally followed by several Sections.
-# - Sections can have several Images.
+# - Projects can have several Sections.
+# - Sections have Targets, Attributes and Images
+# - Each target is a Graphite command for what to draw
+# - The Attributes section gives global attributes for HOW to draw it
+# - Each Image shows a title and other local attributes (such as time)
+#    for how to draw the end image.
 #
 # -----------------------------------------------------------
 #
 # The format of the config file is as follows:
 # 
 # Title: Page title
+# RenderURL: http://graphite.you.com/URL/to/Rendering/?
 # [Project Name]:
-#   Images:
-#     [Image Name]: [Image URL]
-#     [Image Name]: [Image URL]
-#   Sections:
-#     [Section Name]:
-#       [Image Name]: [Image URL]
-#       [Image Name]: [Image URL]
-#       ...
-#     [Section Name]:
-#       [Image Name]: [Image URL]
-#       ...
-#     ...
+#   [Section Name]:
+#     Targets:
+#       [Name]: [Command]
+#       [Name]: [Command]
+#       [Name]: [Command]
+#     Attributes:
+#       [Attribute]: [Value]
+#       [Attribute]: [Value]
+#       [Attribute]: [Value]
+#     Images:
+#       [ImageName]:
+#         [Attribute]: [Value]
+#         [Attribute]: [Value]
+#       [ImageName]:
+#         [Attribute]: [Value]
+#         [Attribute]: [Value]
 #
 # [Project Name]:
 #   ...
@@ -46,38 +54,76 @@
 # commonly, two 370px wide images on a line.
 
 Title: LifeChurch.tv Dashboard
+RenderURL: http://placekitten.com/370/220/?
 
 YouVersion:
-  Images:
-    Hourly: http://placekitten.com/920/220
-    Daily:  http://placekitten.com/370/220
-    Weekly: http://placekitten.com/530/220
-  Sections:
-    API:
-      Images:
-        Hourly: http://placekitten.com/760/220
-        Daily:  http://placekitten.com/370/220
-        Weekly: http://placekitten.com/370/220
-    www/mdot:
-      Images:
-        Hourly: http://placekitten.com/370/220
-        Daily:  http://placekitten.com/370/220
-        Weekly: http://placekitten.com/370/220
+  App Server Load:
+    Targets:
+      Rate: alias(sumSeries(collectd.app*.load.load),"Load")
+    Attributes:
+      width: 293
+      height: 220
+      bgcolor: FFFFFF
+      fgcolor: 111111
+    Images:
+      5 Minutes:
+        from: -6minutes
+      1 Hour:
+        from: -1hours
+      1 Day:
+        from: -1days
+      1 Month:
+        from: -1months
+  Database Load:
+    Targets:
+      Rate: alias(sumSeries(collectd.db*.load.load),"Load")
+    Attributes:
+      width: 293
+      height: 220
+      bgcolor: FFFFFF
+      fgcolor: 111111
+    Images:
+      5 Minutes:
+        from: -6minutes
+      1 Hour:
+        from: -1hours
+      1 Day:
+        from: -1days
+      1 Month:
+        from: -1months
 
-Church Online Platform:
-  Images:
-    Hourly: http://placekitten.com/293/220
-    Daily:  http://placekitten.com/294/220
-    Weekly: http://placekitten.com/293/220
-  Sections:
-    API:
-      Images:
-        Hourly: http://placekitten.com/370/220
-        Daily:  http://placekitten.com/370/220
-        Weekly: http://placekitten.com/370/220
-    www/mdot:
-      Images:
-        Hourly: http://placekitten.com/370/220
-        Daily:  http://placekitten.com/370/220
-        Weekly: http://placekitten.com/370/220
-
+MySite.Com:
+  Load:
+    Targets:
+      Rate: alias(sumSeries(collectd.app*.load.load),"Load")
+    Attributes:
+      width: 293
+      height: 220
+      bgcolor: FFFFFF
+      fgcolor: 111111
+    Images:
+      5 Minutes:
+        from: -6minutes
+      1 Hour:
+        from: -1hours
+      1 Day:
+        from: -1days
+      1 Month:
+        from: -1months
+  Memory:
+    Targets:
+      Rate: alias(sumSeries(collectd.db*.load.load),"Load")
+    Attributes:
+      width: 293
+      height: 220
+      bgcolor: FFFFFF
+      fgcolor: 111111
+    Images:
+      5 Minutes:
+        from: -6minutes
+      1 Hour:
+        from: -1hours
+      1 Day:
+        from: -1days
+      1 Month:
+        from: -1months
