@@ -2,38 +2,38 @@
 %html
   %head
     %link{:rel => "stylesheet", :type => "text/css", :href => "css/style.css"}
-    %title= data['Title'] 
+    %title= data['Title']
   %body
     %section
       %h1= data.delete('Title')
+      - renderURL = data.delete('RenderURL')
       - data.each do |k, v|
         %div.links
           %strong
             %a{:href => "\##{k.slugify}"}><
               = k
           \:&nbsp;
-          - v["Sections"].each do |kk, vv|
+          - v.each do |kk, vv|
             %a{:href => "\##{k.slugify}_#{kk.slugify}"}<
               = kk
             &nbsp;
     - data.each do |k, v|
       %section
-        -# Projects
         %h2{:id => k.slugify}= k
-        - v['Images'].each do |kk, vv|
-          .tile
-            %img{:id => "#{k.slugify}_#{kk.slugify}_img", :src => vv, :alt => kk}
-            %h4{:id => "#{k.slugify}_#{kk.slugify}"}= kk
-        %div{:style => "clear: both;"}
-        - v['Sections'].each do |kk, vv|
+        -# Graphs
+        - v.each do |kk, vv|
           %div.section
             -# Sections
             %h3{:id => "#{k.slugify}_#{kk.slugify}"}= kk
             .graphs
               - vv["Images"].each do |jjj, vvv|
-                -# Graphs
+                -# Where Graphs Go
                 .tile
-                  %img{:id => "#{k.slugify}_#{kk.slugify}_#{jjj.slugify}_img", :src => vvv, :alt => jjj}
+                  - attributes = ""
+                  - attributes = vv["Targets"].values.join "&target="
+                  - vv["Attributes"].each {|ak, av| attributes << "&#{ak}=#{av}" }
+                  - vvv.each {|ak, av| attributes << "&#{ak}=#{av}" }
+                  - imgsrc = "#{renderURL}&target=#{attributes}"
+                  %img{:id => "#{k.slugify}_#{kk.slugify}_#{jjj.slugify}_img", :src => imgsrc, :alt => jjj}
                   %h4{:id => "#{k.slugify}_#{kk.slugify}_#{jjj.slugify}"}= jjj
           %div{:style => "clear: both;"}
-        
